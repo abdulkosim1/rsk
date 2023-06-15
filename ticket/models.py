@@ -44,17 +44,17 @@ class Ticket(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE) #отделение
 
     transaction = models.CharField(choices=transaction_list, default='money_transfers', max_length=50)
-    status = models.CharField(choices=status_list, default='not_active', max_length=50)
     
     date = models.DateField()
     time = models.TimeField()
 
-    activation_code = models.CharField(max_length=5, unique=True, blank=True)
+    status = models.CharField(choices=status_list, default='not_active', max_length=50, blank=True)
+    activation_code = models.CharField(max_length=7, unique=True, blank=True)
     number = models.CharField(max_length=6, unique=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.activation_code:
-            random_digits = ''.join(random.choices(string.digits, k=3))
+            random_digits = ''.join(random.choices(string.digits, k=5))
             city_first_letter = self.department.city.title[0]
             department_first_letter = self.department.title[0]
             activation_code = f'{city_first_letter}{department_first_letter}{random_digits}'

@@ -44,3 +44,9 @@ class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = '__all__'
+
+class ActivateTicketSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Ticket
+        fields = ('number', 'activation_code', 'status')

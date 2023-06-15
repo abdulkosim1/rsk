@@ -7,4 +7,5 @@ urlpatterns = [
     path('city/', CityAPIView.as_view()),
     path('department/', DepartmentAPIView.as_view()),
     path('area/', AreaAPIView.as_view()),
+    path('activate/', TicketActivationView.as_view()),
 ]

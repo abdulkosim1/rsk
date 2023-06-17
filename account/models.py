@@ -31,16 +31,16 @@ class UserManager(BaseUserManager):
         return self._create_user(phone_number, password, **extra_fields)
 
 class CustomUser(AbstractUser):
-    
+
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
     name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     pin = models.CharField(max_length=14)
-    # profile_image = models.ImageField(blank=True, null=True, upload_to='profile_images')
     phone_number = models.CharField(max_length=20, unique=True)
 
     is_active = models.BooleanField(default=False)
+    is_worker = models.BooleanField(default=False)
     username = None
     activation_code = models.CharField(max_length=50, blank=True)
 

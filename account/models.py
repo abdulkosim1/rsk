@@ -36,6 +36,7 @@ class CustomUser(AbstractUser):
     password = models.CharField(max_length=100)
     name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+    otchestvo = models.CharField(max_length=50)
     pin = models.CharField(max_length=14)
     phone_number = models.CharField(max_length=20, unique=True)
 

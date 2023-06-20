@@ -19,9 +19,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
     path('ticket/', include('ticket.urls')),
+    path('queue/', include('queues.urls')),
 
     path('swagger/', schema_view.with_ui('swagger')),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

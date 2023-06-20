@@ -61,19 +61,17 @@ class Ticket(models.Model):
 
             self.activation_code = activation_code
 
-        #генерация номера билета по принципу: 1я буква номера = 1я буква области, 2я буква = 1я буква типа транзакции, остальные 3 цифры = порядковый номер билета
         if not self.number:
-            region_code = self.region.title[0].upper()
             transaction_code = self.transaction[0].upper()
             last_ticket_number = Ticket.objects.order_by('-id').first()
             if last_ticket_number:
                 last_number = int(last_ticket_number.number[2:])
             else:
                 last_number = -1
-            new_number = f'{region_code}{transaction_code}{str(last_number + 1).zfill(3)}'
+            new_number = f'{transaction_code}{str(last_number + 1).zfill(3)}'
             self.number = new_number
         
         super().save(*args, **kwargs)
 
-    def __str__(self) -> str:
-        return f'{self.owner} - {self.number}'
+    def __str__(self):
+        return f"Билет: {self.number}, Владелец: {self.owner.email}, Операция: {self.transaction}"
